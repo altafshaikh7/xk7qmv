@@ -16,6 +16,10 @@ export default function MonthView({ data }) {
   return (
     <>
       <div className="banner">
+        <svg className="banner-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" stroke="#4f46e5" strokeWidth="1.5" />
+          <path d="M10 9v4M10 6.2v.1" stroke="#4f46e5" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
         Delivery days 2 Jan to 1 Feb 2026 ({data.days_covered} days, {o.n_hours} hours).
         Purchase decisions are made on D-1, so the decisions fall in January 2026.
       </div>
@@ -34,14 +38,14 @@ export default function MonthView({ data }) {
       <div className="chart">
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={daily} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="day" />
-            <YAxis />
-            <Tooltip formatter={(v) => fmtMW(v)} />
-            <Legend />
-            <ReferenceLine y={0} stroke="#444" />
-            <Bar dataKey="mae" name="MAE" fill="#2563eb" />
-            <Bar dataKey="bias" name="Bias" fill="#dc2626" />
+            <CartesianGrid stroke="#e9eef5" strokeDasharray="3 5" vertical={false} />
+            <XAxis dataKey="day" tickLine={false} />
+            <YAxis tickLine={false} axisLine={false} />
+            <Tooltip formatter={(v) => fmtMW(v)} contentStyle={{ borderRadius: 10, borderColor: "#e2e8f0", boxShadow: "0 8px 24px rgb(15 23 42 / 12%)" }} />
+            <Legend verticalAlign="top" height={32} />
+            <ReferenceLine y={0} stroke="#94a3b8" strokeDasharray="4 4" />
+            <Bar dataKey="mae" name="MAE" fill="#4f46e5" radius={[5, 5, 0, 0]} />
+            <Bar dataKey="bias" name="Bias" fill="#e11d48" radius={[5, 5, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -50,13 +54,13 @@ export default function MonthView({ data }) {
       <div className="chart">
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={byHour} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="hour" />
-            <YAxis />
-            <Tooltip formatter={(v) => fmtMW(v)} />
-            <Legend />
-            <Line type="monotone" dataKey="mae" name="MAE" stroke="#2563eb" dot={false} strokeWidth={2} />
-            <Line type="monotone" dataKey="bias" name="Bias" stroke="#dc2626" dot={false} strokeWidth={2} />
+            <CartesianGrid stroke="#e9eef5" strokeDasharray="3 5" vertical={false} />
+            <XAxis dataKey="hour" tickLine={false} />
+            <YAxis tickLine={false} axisLine={false} />
+            <Tooltip formatter={(v) => fmtMW(v)} contentStyle={{ borderRadius: 10, borderColor: "#e2e8f0", boxShadow: "0 8px 24px rgb(15 23 42 / 12%)" }} />
+            <Legend verticalAlign="top" height={32} />
+            <Line type="monotone" dataKey="mae" name="MAE" stroke="#4f46e5" dot={false} strokeWidth={2.5} />
+            <Line type="monotone" dataKey="bias" name="Bias" stroke="#e11d48" dot={false} strokeWidth={2.5} />
           </LineChart>
         </ResponsiveContainer>
       </div>
