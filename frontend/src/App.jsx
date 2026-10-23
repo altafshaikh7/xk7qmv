@@ -89,8 +89,16 @@ export default function App() {
         </p>
       )}
 
-      {loading && <p className="status">Loading...</p>}
-      {error && <p className="status error">{error}</p>}
+      {loading && <p className="status loading">Loading...</p>}
+      {error && (
+        <p className="status error" role="alert">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.6" />
+            <path d="M10 6v4.5M10 13.5v.1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
+          {error}
+        </p>
+      )}
 
       {!error && view === "day" && dayData && <DayView data={dayData} monthly={monthData} />}
       {!error && view === "month" && monthData && <MonthView data={monthData} />}
