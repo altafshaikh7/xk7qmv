@@ -226,18 +226,26 @@ Repository Structure
 │   └── probe2.py
 ├── docs/
 │   └── screenshots/
+│       ├── decision-day.png
+│       ├── month-overview.png
+│       └── month-charts.png
 ├── docker-compose.yml
 ├── vercel.json
 ├── README.md
 └── .gitignore
-- backend/app/: API, configuration, forecast selection, and metrics.
-- backend/data/: CSV snapshots of actual generation and forecasts.
-- backend/tests/: backend unit tests.
-- frontend/src/: React entry point, views, API client, UI helpers, and styling.
-- scripts/: data retrieval and Elexon data inspection scripts.
-- docs/screenshots/: README screenshots.
-- docker-compose.yml: local multi-container setup.
-- vercel.json: Vercel deployment and routing configuration.
+Key Directories and Files
+Path	Purpose
+backend/app/	FastAPI application, configuration, forecast-selection logic, and accuracy metrics.
+backend/data/	CSV snapshots containing actual wind generation and forecast data.
+backend/tests/	Backend unit tests.
+frontend/src/	React entry point, day and month views, API client, UI helpers, and CSS.
+scripts/	Scripts for fetching and inspecting Elexon data.
+docs/screenshots/	Screenshots used in this README.
+docker-compose.yml	Local frontend and backend container setup.
+vercel.json	Vercel deployment and routing configuration.
+.gitignore	Files and directories Git should ignore.
+
+
 Getting Started
 The project was developed and tested with Python 3.14.7, Node.js 24.21.0, and Docker 29.8.0 on Windows.
 Option 1: Docker
