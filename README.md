@@ -187,6 +187,7 @@ Features
 - Unit tests: Covers forecast cutoff selection, hourly averaging, and metric calculations.
 Not implemented: demand or electricity-price data, forecasting models, authentication, persistent database storage, and automated data refresh.
 Repository Structure
+<pre>
 .
 ├── backend/
 │   ├── app/
@@ -233,6 +234,8 @@ Repository Structure
 ├── vercel.json
 ├── README.md
 └── .gitignore
+</pre>
+
 Key Directories and Files
 Path	Purpose
 backend/app/	FastAPI application, configuration, forecast-selection logic, and accuracy metrics.
