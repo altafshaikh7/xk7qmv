@@ -17,10 +17,14 @@ export default function DayView({ data, monthly }) {
   return (
     <>
       <div className="banner">
+        <svg className="banner-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" stroke="#4f46e5" strokeWidth="1.5" />
+          <path d="M10 9v4M10 6.2v.1" stroke="#4f46e5" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
         <strong>Decision basis:</strong> for delivery on {data.delivery_day}, the buyer
         decides on D-1 at {data.cutoff_local} UK time ({fmtTime(data.cutoff_utc)}).
         The latest forecast available was published at{" "}
-        <strong>{fmtTime(data.latest_forecast_published)}</strong>. Forecasts published
+        <strong className="published-time">{fmtTime(data.latest_forecast_published)}</strong>. Forecasts published
         after the cutoff are never used.
       </div>
 
@@ -28,13 +32,13 @@ export default function DayView({ data, monthly }) {
       <div className="chart">
         <ResponsiveContainer width="100%" height={320}>
           <LineChart data={rows} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="hour" />
-            <YAxis tickFormatter={(v) => `${v / 1000}`} label={{ value: "GW", angle: -90, position: "insideLeft" }} />
-            <Tooltip formatter={(v) => fmtMW(v)} />
-            <Legend />
-            <Line type="monotone" dataKey="forecast" name="Forecast (at decision time)" stroke="#2563eb" dot={false} strokeWidth={2} />
-            <Line type="monotone" dataKey="actual" name="Actual" stroke="#16a34a" dot={false} strokeWidth={2} />
+            <CartesianGrid stroke="#e9eef5" strokeDasharray="3 5" vertical={false} />
+            <XAxis dataKey="hour" tickLine={false} />
+            <YAxis tickFormatter={(v) => `${v / 1000}`} tickLine={false} axisLine={false} label={{ value: "GW", angle: -90, position: "insideLeft", fill: "#64748b" }} />
+            <Tooltip formatter={(v) => fmtMW(v)} contentStyle={{ borderRadius: 10, borderColor: "#e2e8f0", boxShadow: "0 8px 24px rgb(15 23 42 / 12%)" }} />
+            <Legend verticalAlign="top" height={32} />
+            <Line type="monotone" dataKey="forecast" name="Forecast (at decision time)" stroke="#4f46e5" dot={false} strokeWidth={2.5} />
+            <Line type="monotone" dataKey="actual" name="Actual" stroke="#10b981" dot={false} strokeWidth={2.5} />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -44,12 +48,12 @@ export default function DayView({ data, monthly }) {
       <div className="chart">
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={rows} margin={{ top: 8, right: 16, bottom: 8, left: 8 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="hour" />
-            <YAxis />
-            <Tooltip formatter={(v) => fmtMW(v)} />
-            <ReferenceLine y={0} stroke="#444" />
-            <Bar dataKey="error" name="Error (MW)" fill="#dc2626" />
+            <CartesianGrid stroke="#e9eef5" strokeDasharray="3 5" vertical={false} />
+            <XAxis dataKey="hour" tickLine={false} />
+            <YAxis tickLine={false} axisLine={false} />
+            <Tooltip formatter={(v) => fmtMW(v)} contentStyle={{ borderRadius: 10, borderColor: "#e2e8f0", boxShadow: "0 8px 24px rgb(15 23 42 / 12%)" }} />
+            <ReferenceLine y={0} stroke="#94a3b8" strokeDasharray="4 4" />
+            <Bar dataKey="error" name="Error (MW)" fill="#e11d48" radius={[5, 5, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -65,6 +69,10 @@ export default function DayView({ data, monthly }) {
 
       {o && (
         <div className="banner">
+          <svg className="banner-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="10" cy="10" r="8" stroke="#4f46e5" strokeWidth="1.5" />
+            <path d="M10 9v4M10 6.2v.1" stroke="#4f46e5" strokeWidth="1.8" strokeLinecap="round" />
+          </svg>
           <strong>Using the error in the decision (January 2026 history, same cutoff):</strong>{" "}
           forecast exceeded actual by {fmtMW(o.bias_mw)} on average, and 90% of hours were within{" "}
           {fmtMW(o.p90_abs_error_mw)}. This is measured on the same month it describes, so treat it
